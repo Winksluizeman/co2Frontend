@@ -1,0 +1,43 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Local environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+vite.config.ts.timestamp-*
+*.log
+
+# Editor & IDE settings
+.vscode/
+.idea/
+*.sw?
+*.swo
+*.swn
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Optional: if you use testing or coverage tools
+coverage/
+*.lcov
+
+# Optional: if you use TypeScript
+*.tsbuildinfo
+
+# Optional: if you deploy with Netlify/Vercel
+.vercel/
+.netlify/

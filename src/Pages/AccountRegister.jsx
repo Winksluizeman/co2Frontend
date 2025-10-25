@@ -149,10 +149,6 @@ export default function AccountRegister() {
                         {loading ? "Bezig..." : "Account aanmaken"}
                     </button>
                 </div>
-
-                <div className="form-terms">
-                    Door verder te gaan ga je akkoord met onze voorwaarden.
-                </div>
             </form>
         </div>
     );

@@ -1,5 +1,6 @@
 import React from "react";
 import "../Css/Home.css";
+import "../Css/AccountBox.css";
 import { Link } from "react-router-dom";
 
 export default function Home() {
@@ -14,11 +15,27 @@ export default function Home() {
                         effect. Snel inzicht, duidelijke doelen en slimme tips.
                     </p>
 
+                    <div className="ActivatedAccount">
+                        <header className="activatedAccount-box">
+                            <div className="account-card">
+                                <div className="account-info">
+                                    <div className="account-name">""</div>
+                                    <div className="account-sub">Actief sinds 2025</div>
+                                </div>
+                                <div className="account-actions">
+                                    <Link to="/profile" className="btn small">Bekijk profiel</Link>
+                                </div>
+                            </div>
+                        </header>
+                    </div>
+
                     <div className="hero-actions">
                         <Link to="/register" className="btn primary">Account aanmaken</Link>
+                        <Link to="/login" className="btn primary">Login</Link>
                         <Link to="/" className="btn ghost">Meer info</Link>
                     </div>
                 </div>
+
 
                 <div className="hero-right" aria-hidden="true">
                     <div className="meter">
@@ -64,6 +81,7 @@ export default function Home() {
                     <li>Verbeter isolatie en verwarmingsinstellingen thuis</li>
                 </ul>
             </section>
+
         </div>
     );
 }

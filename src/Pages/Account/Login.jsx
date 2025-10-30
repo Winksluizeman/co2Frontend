@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import "../../Css/AccountRegister.css";
-import { useNavigate } from "react-router-dom";
+import "../../Css/Account/AccountRegister.css";
+import "../../Css/Theme.css";
+import "../../Css/Home.css";
+import {Link, useNavigate} from "react-router-dom";
 
 export default function AccountRegister() {
     const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [age, setAge] = useState("");
     const [showPass, setShowPass] = useState(false);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -15,8 +15,6 @@ export default function AccountRegister() {
     const validate = () => {
         if (!username.trim()) return "Vul een gebruikersnaam in";
         if (password.length < 6) return "Wachtwoord moet minstens 6 tekens zijn";
-        const leeftijd = Number(age);
-        if (!Number.isFinite(leeftijd) || leeftijd < 0) return "Voer een geldige leeftijd in";
         return "";
     };
 
@@ -33,9 +31,7 @@ export default function AccountRegister() {
         try {
             const payload = {
                 username: username.trim(),
-                email: email.trim(),
-                password,
-                age: Number(age),
+                password
             };
 
             const resp = await fetch("http://localhost:8080/api/register", {
@@ -52,8 +48,8 @@ export default function AccountRegister() {
             // Succes — navigeer naar home of dashboard
             navigate("/");
         } catch (err) {
-            console.error("Registratie fout:", err);
-            setError("Kon het account niet aanmaken. Probeer het later opnieuw.");
+            console.error("Login fout:", err);
+            setError("Kon niet inloggen. Probeer het later opnieuw.");
         } finally {
             setLoading(false);
         }
@@ -66,7 +62,7 @@ export default function AccountRegister() {
     return (
         <div className="register-card" role="region" aria-labelledby="register-title">
             <div className="card-header">
-                <h2 id="register-title">Maak een account</h2>
+                <h2 id="register-title">Log in</h2>
                 <p>Vul je gegevens in om je CO2-voetafdruk bij te houden.</p>
             </div>
 
@@ -81,20 +77,6 @@ export default function AccountRegister() {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         autoComplete="username"
-                        required
-                    />
-                </div>
-
-                <div className="form-field">
-                    <label htmlFor="email">E-mail</label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="naam@voorbeeld.nl"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        autoComplete="email"
                         required
                     />
                 </div>
@@ -124,19 +106,7 @@ export default function AccountRegister() {
                     </button>
                 </div>
 
-                <div className="form-field">
-                    <label htmlFor="age">Leeftijd</label>
-                    <input
-                        id="age"
-                        name="age"
-                        type="number"
-                        min="0"
-                        placeholder="Bijv. 28"
-                        value={age}
-                        onChange={(e) => setAge(e.target.value)}
-                        required
-                    />
-                </div>
+                <Link to="/register" className="btn primary">Nog geen account?</Link>
 
                 {error && <div className="field-error" role="alert">{error}</div>}
 
@@ -145,7 +115,7 @@ export default function AccountRegister() {
                         Annuleren
                     </button>
                     <button type="submit" className="btn primary buttonAccount" disabled={loading}>
-                        {loading ? "Bezig..." : "Account aanmaken"}
+                            {loading ? "Bezig..." : "Inloggen"}
                     </button>
                 </div>
             </form>

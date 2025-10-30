@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../Css/AccountRegister.css";
+import "../../Css/Account/AccountRegister.css";
 import { useNavigate } from "react-router-dom";
 
 export default function AccountRegister() {

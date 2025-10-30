@@ -13,6 +13,8 @@
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     font-weight: 400;
     line-height: 1.5;
+    margin-top : 70px;
+
 }
 
 body {
@@ -56,3 +58,47 @@ button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+
+
+.navbar {
+    position: fixed;
+    top: 0; /* Zorgt dat hij helemaal bovenaan zit */
+    left: 0; /* Start vanaf de linkerkant */
+    right: 0; /* Eindigt aan de rechterkant */
+    width: 100%; /* Vult het hele scherm */
+    background-color: #87e097;
+    color: black;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li a {
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 40px;
+}
+
+.navbar-links li a:hover {
+    text-decoration: underline;
+}
+
+

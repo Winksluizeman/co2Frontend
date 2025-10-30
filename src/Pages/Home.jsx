@@ -1,6 +1,7 @@
 import React from "react";
 import "../Css/Home.css";
-import "../Css/AccountBox.css";
+import "../Css/Account/AccountBox.css";
+import "../Css/Theme.css";
 import { Link } from "react-router-dom";
 
 export default function Home() {
@@ -30,9 +31,7 @@ export default function Home() {
                     </div>
 
                     <div className="hero-actions">
-                        <Link to="/register" className="btn primary">Account aanmaken</Link>
-                        <Link to="/login" className="btn primary">Login</Link>
-                        <Link to="/" className="btn ghost">Meer info</Link>
+                        <Link to="/DashboardMenu" className="btn primary">Meer info</Link>
                     </div>
                 </div>
 

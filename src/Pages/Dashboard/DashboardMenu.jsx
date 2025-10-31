@@ -31,7 +31,7 @@ import GroenTuinieren from '../../assets/Images/DashboardMenu/GroenTuinieren.png
                     Elke keuze telt. Begin hier, en zet samen met ons de stap naar een groenere toekomst!
                 </p>
 
-                <Link to="/login" className="btn primary">Lees meer</Link>
+                <Link to="/DashboardHousehold" className="btn primary">Lees meer</Link>
 
             </div>
 

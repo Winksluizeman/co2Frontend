@@ -5,6 +5,7 @@ import AccountRegister from "./Pages/Account/AccountRegister.jsx";
 import Login from "./Pages/Account/Login.jsx";
 import DashboardMenu from "./Pages/Dashboard/DashboardMenu.jsx";
 import Navbar from "./Pages/Navbar.jsx"; // Zorg dat dit pad klopt
+import DashboardHousehold from "./Pages/Dashboard/Household/DashboardHousehold.jsx";
 
 export default function App() {
     return (
@@ -16,6 +17,7 @@ export default function App() {
                     <Route path="/register" element={<AccountRegister />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/DashboardMenu" element={<DashboardMenu />} />
+                    <Route path="/DashboardHouseHold" element={<DashboardHousehold />} />
                 </Routes>
             </main>
         </BrowserRouter>

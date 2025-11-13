@@ -1,16 +1,15 @@
-version: '3.8'
-
 services:
-  co2-tracker:
+  co2-frontend:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "3000:3000"
     volumes:
       - .:/app
-    command: ./gradlew bootRun
+    command: npm start
     develop:
       watch:
         - path: ./src
+          target: /app/src
           action: sync

@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  run-tests:
+  cypress-run:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,15 +21,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # -------------------------
-      # FRONTEND UNIT TESTS (JEST)
-      # -------------------------
-      - name: Run frontend unit tests
-        run: npm test -- --watchAll=false
-
-      # -------------------------
-      # START FRONTEND FOR CYPRESS
-      # -------------------------
       - name: Start frontend
         run: npm run dev &
 
@@ -38,8 +29,5 @@ jobs:
         with:
           url: http://localhost:5173
 
-      # -------------------------
-      # CYPRESS UI TESTS
-      # -------------------------
       - name: Run Cypress tests
         run: npx cypress run

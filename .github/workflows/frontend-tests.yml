@@ -2,8 +2,7 @@ name: Frontend UI Tests
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
   pull_request:
 
 jobs:
@@ -12,31 +11,26 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install dependencies
         run: npm install
-
-      - name: Start backend
-        run: |
-          cd ../co2Backend
-          ./gradlew bootRun &
-        shell: bash
-
-      - name: Wait for backend to be ready
-        run: npx wait-on http://localhost:8080
+        working-directory: co2Frontend
 
       - name: Start frontend
         run: npm run dev &
-        shell: bash
+        working-directory: co2Frontend
 
-      - name: Wait for frontend to be ready
-        run: npx wait-on http://localhost:5173
+      - name: Wait for frontend
+        uses: jakejarvis/wait-action@v0.1.0
+        with:
+          url: http://localhost:5173
 
       - name: Run Cypress tests
         run: npx cypress run
+        working-directory: co2Frontend

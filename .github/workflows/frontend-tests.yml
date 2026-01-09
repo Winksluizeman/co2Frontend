@@ -20,11 +20,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory:
 
       - name: Start frontend
         run: npm run dev &
-        working-directory:
 
       - name: Wait for frontend
         uses: jakejarvis/wait-action@v0.1.0
@@ -33,4 +31,3 @@ jobs:
 
       - name: Run Cypress tests
         run: npx cypress run
-        working-directory: co2Frontend

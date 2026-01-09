@@ -1,0 +1,43 @@
+name: Frontend UI Tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start backend
+        run: |
+          cd ../co2Backend
+          ./gradlew bootRun &
+        shell: bash
+
+      - name: Wait for backend to be ready
+        run: npx wait-on http://localhost:8080
+
+      - name: Start frontend
+        run: npm run dev &
+        shell: bash
+
+      - name: Wait for frontend to be ready
+        run: npx wait-on http://localhost:5173
+
+      - name: Run Cypress tests
+        run: npx cypress run

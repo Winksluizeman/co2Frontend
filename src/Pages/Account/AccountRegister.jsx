@@ -9,6 +9,7 @@ export default function AccountRegister() {
     const [age, setAge] = useState("");
     const [showPass, setShowPass] = useState(false);
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");   // ✅ nieuw
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -24,6 +25,8 @@ export default function AccountRegister() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
+        setSuccess(""); // reset success
+
         const err = validate();
         if (err) {
             setError(err);
@@ -39,7 +42,7 @@ export default function AccountRegister() {
                 age: Number(age),
             };
 
-            const resp = await fetch("http://localhost:8080/api/register", {
+            const resp = await fetch("http://localhost:8080/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
@@ -50,8 +53,12 @@ export default function AccountRegister() {
                 throw new Error(text || `Status ${resp.status}`);
             }
 
-            // Succes — navigeer naar home of dashboard
-            navigate("/");
+            // ✅ Succesmelding voor Cypress
+            setSuccess("Account successfully created");
+
+            // (optioneel) redirect na 1.5 sec
+            // setTimeout(() => navigate("/"), 1500);
+
         } catch (err) {
             console.error("Registratie fout:", err);
             setError("Kon het account niet aanmaken. Probeer het later opnieuw.");
@@ -140,6 +147,7 @@ export default function AccountRegister() {
                 </div>
 
                 {error && <div className="field-error" role="alert">{error}</div>}
+                {success && <div className="field-success">{success}</div>} {/* ✅ nieuw */}
 
                 <div className="form-actions">
                     <button type="button" className="btn secondary" onClick={handleCancel} disabled={loading}>

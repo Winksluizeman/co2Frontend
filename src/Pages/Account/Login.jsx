@@ -45,6 +45,7 @@ export default function AccountRegister() {
                 throw new Error(text || `Status ${resp.status}`);
             }
 
+            //Test
             // Succes — navigeer naar home of dashboard
             navigate("/");
         } catch (err) {

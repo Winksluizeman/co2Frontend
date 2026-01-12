@@ -1,12 +1,12 @@
-name: Frontend Tests
+name: Frontend CI/CD
 
 on:
   push:
-    branches: [master]
+    branches: [ "master" ]
   pull_request:
 
 jobs:
-  cypress-run:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,9 +25,33 @@ jobs:
         run: npm run dev &
 
       - name: Wait for frontend
-        uses: jakejarvis/wait-action@v0.1.0
-        with:
-          url: http://localhost:5173
+        run: | 
+          for i in {1..60}; do if curl -s http://localhost:5173 > /dev/null; then
+          echo "Frontend is up"
+          exit 0
+          fi 
+          echo "Waiting for frontend..." 
+          sleep 2 done echo "Frontend did not start in time" 
+          exit 1
+
 
       - name: Run Cypress tests
         run: npx cypress run
+
+  build-and-push:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u winksluizeman --password-stdin
+
+      - name: Build frontend image
+        run: docker build -t ghcr.io/winksluizeman/co2tracker-frontend:${{ github.sha }} .
+
+      - name: Push frontend image
+        run: docker push ghcr.io/winksluizeman/co2tracker-frontend:${{ github.sha }}

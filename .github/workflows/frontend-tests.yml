@@ -82,5 +82,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/winksluizeman/co2tracker-frontend:latest
-            ghcr.io/winksluizeman/co2tracker-frontend:${{ github.sha }}
+            ghcr.io/Winksluizeman/co2tracker-frontend:latest
+            ghcr.io/Winksluizeman/co2tracker-frontend:${{ github.sha }}
